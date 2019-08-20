@@ -1,0 +1,21 @@
+body {
+    background-color: #302e2e;
+    font-family: "open-sans";
+}
+
+a,
+p,
+h1,
+h2,
+h4 {
+    font-family: "Open-Sans", sans-serif;
+    color: rgb(204, 204, 204);
+}
+
+#header_div {
+    margin-bottom: 10em;
+}
+
+#title {
+    text-align: center;
+}
