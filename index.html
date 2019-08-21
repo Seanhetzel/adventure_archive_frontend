@@ -2,20 +2,25 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8" />
-        <title>Cloneterest</title>
+        <title>Adventure Archive</title>
         <link rel="stylesheet" href="./style.css" />
         <script src="src/index.js" charset="utf-8"></script>    </head>
     <body>
         <div id="header_div">
+            <!-- <img src="https://images.unsplash.com/photo-1513193232743-99c890a0e769?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt="machu pichu"> -->
             <h1 id="title">
                 Adventure Archive
             </h1>
         </div>
         <div id="add_site_div">
             <h2>add site form</h2>
+            <form id="add_site_form">
+                <input type="text" name="site_ame" placeholder="Site Name"><br>
+                <textarea name="body_input" rows="25" cols="150" placeholder="Site Description"></textarea>
+                <input id="submit_button" type="submit" value="Submit">
+            </form>
         </div>
         <div id="sites_div">
-            <p id="site">sites listed here</p> 
         </div>
     </body>
 </html>
