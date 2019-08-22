@@ -63,42 +63,50 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderEditForm(site, siteCard) {
         const editForm = document.createElement("form");
 
+        // create site name input
         const siteName = document.createElement("input");
         siteName.textContent = site.name;
         editForm.appendChild(siteName);
 
+        // create side description input
         const siteDescription = document.createElement("input");
         siteDescription.textContent = site.description;
         editForm.appendChild(siteDescription);
 
+        // create submit button input
         const submitButton = document.createElement("button");
         submitButton.classList.add("edit_site_submit_button");
         submitButton.textContent = "Done";
         editForm.appendChild(submitButton);
 
-        document.getElementById("sites_div").appendChild(editForm);
+        // append edit form to site card
         siteCard.appendChild(editForm);
 
+        // add event listener when form is submitted to update
         editForm.addEventListener("submit", event => {
             event.preventDefault();
-            fetch(`${URL}/${site.id}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json"
-                },
-                body: JSON.stringify({
-                    name: event.target[0].value, // update name do database
-                    description: event.target[1].value // update description do database
-                })
-            })
-                .then(response => response.json())
-                .then(siteObj => {
-                    renderSites(siteObj);
-                });
-
+            editFormFetch(event, site);
             editForm.reset();
         });
+    }
+
+    // fetch PATCH to update site
+    function editFormFetch(event, site) {
+        fetch(`${URL}/${site.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({
+                name: event.target[0].value, // update name to database
+                description: event.target[1].value // update desc to db
+            })
+        })
+            .then(response => response.json())
+            .then(siteObj => {
+                renderSites(siteObj);
+            });
     }
 
     // add_site_form event listener to addSite
@@ -123,8 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 Accept: "application/json"
             },
             body: JSON.stringify({
-                name: SiteData.name, // save name do database
-                description: SiteData.description // save description do database
+                name: SiteData.name, // save name to database
+                description: SiteData.description // save description to db
             })
         })
             .then(response => response.json())
