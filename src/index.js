@@ -11,6 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // endpoint
     URL = "http://localhost:3000/api/v1/sites";
 
+    document.getElementById("add_site_div").style.display = "none";
+    document.getElementById("divider").style.display = "none";
+
+    document.getElementById("add_site_button").addEventListener("click", () => {
+        renderAddSiteForm();
+        document.getElementById("add_site_div").style.display = "block";
+        document.getElementById("divider").style.display = "block";
+    });
+
     // fetches all sites from database on page load
     fetch(URL)
         .then(function(response) {
@@ -43,12 +52,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create edit button for site
         const editButton = document.createElement("button");
-        editButton.classList.add("site_card_button");
+        editButton.classList.add("button");
         editButton.textContent = "Edit";
         editButton.addEventListener("click", () => {
             renderEditForm(site, siteCard);
             editButton.style.display = "none";
-            deleteButton.style.display = "none";
+            deleteButton.style.display = "block";
+            siteCard.appendChild(deleteButton);
             siteName.style.display = "none";
             siteDescription.style.display = "none";
         });
@@ -56,13 +66,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create delete button for site
         const deleteButton = document.createElement("button");
-        deleteButton.classList.add("site_card_button");
-        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("button");
+        deleteButton.id = "delete_button";
+        deleteButton.textContent = "Delete Site";
         deleteButton.addEventListener("click", () => {
             fetch(`${URL}/${site.id}`, { method: "DELETE" });
             siteCard.remove();
         });
-        siteCard.appendChild(deleteButton);
+        deleteButton.style.display = "none";
 
         // append all site nodes to site card
         console.log(siteCard);
@@ -85,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create submit button input
         const submitButton = document.createElement("button");
-        submitButton.classList.add("edit_site_submit_button");
+        submitButton.classList.add("button");
         submitButton.textContent = "Done";
         editForm.appendChild(submitButton);
 
@@ -138,13 +149,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create submit button
         const submitButton = document.createElement("button");
-        submitButton.id = "submit_button";
+        submitButton.classList.add("button");
         submitButton.textContent = "Submit";
         addSiteForm.appendChild(submitButton);
 
         document.getElementById("add_site_div").appendChild(addSiteForm);
 
-        // add event listener to form and give form data to addSite 
+        // add event listener to form and give form data to addSite
         addSiteForm.addEventListener("submit", event => {
             event.preventDefault();
             addSite(event);
@@ -173,5 +184,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(site);
             });
     }
-    renderAddSiteForm();
+    // renderAddSiteForm();
 });

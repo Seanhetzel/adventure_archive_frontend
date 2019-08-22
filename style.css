@@ -5,6 +5,8 @@ body {
     background-attachment: fixed;
     background-color: #302e2e;
     font-family: "open-sans";
+    margin: 0;
+    padding: 0;
 }
 
 a,
@@ -32,49 +34,73 @@ h4 {
     font-size: 3em;
 }
 
-/* #add_site_form{
-} */
+#add_site_button {
+    margin-left: 4em;
+    margin-bottom: 2em;
+}
+
+#add_site_div {
+    background-color: transparent;
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+input {
+    padding: 10px;
+    font-size: 18pt;
+    color: rgb(204, 204, 204);
+    border: 2px solid rgb(204, 204, 204);
+    background-color: transparent;
+    margin-bottom: 1em;
+}
+
 textarea {
+    padding: 10px;
+    font-size: 12pt;
     width: 100%;
     height: 25em;
+    border: 2px solid rgb(204, 204, 204);
+    color: rgb(204, 204, 204);
     background-color: transparent;
-
-    /* opacity: 0.5; */
-    /* -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px); */
+    margin-bottom: 1em;
 }
 
 ::placeholder {
     color: rgb(204, 204, 204);
 }
 
-/* .box {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    font-family: sans-serif;
-    text-align: center;
-    line-height: 1; 
-   -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);  
-    max-width: 50%;
-    max-height: 50%;
-    padding: 20px 40px;
-  } */
-
-#submit_button {
-    opacity: 1;
+#divider {
+    background-color: #302e2e;
+    padding: 2px;
 }
 
-input {
+.button {
+    border: 2px solid rgb(204, 204, 204);
+    color: rgb(204, 204, 204);
     background-color: transparent;
+    padding-top: 0.25em;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    font-size: 14pt;
+    cursor: pointer;
+}
+
+#delete_button {
+    float: right;
 }
 
 #sites_div {
-    margin-top: 1em;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
-/* .site_card_div{
-    background-color: #302e2e;
-} */
+.site_card_div {
+    padding-left: 5em;
+    padding-right: 5em;
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
