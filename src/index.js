@@ -8,8 +8,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     console.log("%c DOM Content Loaded and Parsed!", "color: magenta");
 
+    // endpoint
     URL = "http://localhost:3000/api/v1/sites";
 
+    // fetches all sites from database on page load
     fetch(URL)
         .then(function(response) {
             return response.json();
@@ -17,14 +19,17 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(function(json) {
             console.log(json);
             json.forEach(site => {
-                renderSites(site);
+                document.getElementById("sites_div").prepend(renderSite(site));
             });
         });
 
-    function renderSites(site) {
+    // renders sites
+    function renderSite(site) {
         // create site card
         const siteCard = document.createElement("div");
         siteCard.classList.add("site_card_div");
+
+        siteCard.id = site.id
 
         // create site name
         const siteName = document.createElement("h2");
@@ -42,6 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
         editButton.textContent = "Edit";
         editButton.addEventListener("click", () => {
             renderEditForm(site, siteCard);
+            editButton.style.display = "none"
+            deleteButton.style.display = "none"
+            siteName.style.display = "none"
+            siteDescription.style.display = "none"
         });
         siteCard.appendChild(editButton);
 
@@ -56,21 +65,22 @@ document.addEventListener("DOMContentLoaded", () => {
         siteCard.appendChild(deleteButton);
 
         // append all site nodes to site card
-        document.getElementById("sites_div").appendChild(siteCard);
+        console.log(siteCard)
+        return siteCard
     }
 
-    // create edit form for site
+    // create edit form for site when user hits edit button
     function renderEditForm(site, siteCard) {
         const editForm = document.createElement("form");
 
         // create site name input
         const siteName = document.createElement("input");
-        siteName.textContent = site.name;
+        siteName.value = site.name;
         editForm.appendChild(siteName);
 
         // create side description input
         const siteDescription = document.createElement("input");
-        siteDescription.textContent = site.description;
+        siteDescription.value = site.description;
         editForm.appendChild(siteDescription);
 
         // create submit button input
@@ -105,7 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
         })
             .then(response => response.json())
             .then(siteObj => {
-                renderSites(siteObj);
+                console.log(siteObj)
+                document.getElementById(site.id).replaceWith(renderSite(siteObj))
+                
             });
     }
 
@@ -137,7 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
             .then(response => response.json())
             .then(siteObj => {
-                renderSites(siteObj);
+                renderSite(siteObj);
                 console.log(siteObj);
             });
     }
