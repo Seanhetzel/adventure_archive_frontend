@@ -26,8 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const siteCard = document.createElement("div");
         siteCard.classList.add("site_card_div");
 
-        siteCard.id = site.id;
-
         // create site name
         const siteName = document.createElement("h2");
         siteName.textContent = site.name;
@@ -43,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         editButton.classList.add("site_card_button");
         editButton.textContent = "Edit";
         editButton.addEventListener("click", () => {
-            renderEditForm(site);
+            renderEditForm(site, siteCard);
         });
         siteCard.appendChild(editButton);
 
@@ -62,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // create edit form for site
-    function renderEditForm(site) {
+    function renderEditForm(site, siteCard) {
         const editForm = document.createElement("form");
 
         const siteName = document.createElement("input");
@@ -76,31 +74,32 @@ document.addEventListener("DOMContentLoaded", () => {
         const submitButton = document.createElement("button");
         submitButton.classList.add("edit_site_submit_button");
         submitButton.textContent = "Done";
-        submitButton.addEventListener("click", () => {
-            editSite(site)
-        })
-        editForm.appendChild(submitButton)
+        editForm.appendChild(submitButton);
 
-        document.getElementById(site.id).appendChild(editForm);
-    }
+        document.getElementById("sites_div").appendChild(editForm);
+        siteCard.appendChild(editForm);
 
-    function editSite(site)
-    fetch(`${URL}/${site.id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-        },
-        body: JSON.stringify({
-            name: SiteData.name, // save name do database
-            description: SiteData.description // save description do database
-        })
-    })
-        .then(response => response.json())
-        .then(siteObj => {
-            renderSites(siteObj);
+        editForm.addEventListener("submit", event => {
+            event.preventDefault();
+            fetch(`${URL}/${site.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({
+                    name: event.target[0].value, // update name do database
+                    description: event.target[1].value // update description do database
+                })
+            })
+                .then(response => response.json())
+                .then(siteObj => {
+                    renderSites(siteObj);
+                });
+
+            editForm.reset();
         });
-});
+    }
 
     // add_site_form event listener to addSite
     document
