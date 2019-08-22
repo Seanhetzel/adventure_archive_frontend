@@ -1,5 +1,10 @@
 body {
-    background-image: url("https://images.unsplash.com/photo-1513193232743-99c890a0e769?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80");
+    /* background-image: url("https://images.unsplash.com/photo-1513193232743-99c890a0e769?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"); */
+    /* background-image: url("https://images.unsplash.com/photo-1524686975162-f6fb4d39759c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80"); */
+    background-image: url("https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80");
+    /* background-image: url("https://images.unsplash.com/photo-1513733582371-0adb4dac50f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80"); */
+    /* background-image: url("https://www.amazingplaces.com/wp-content/uploads/2016/12/Calakmul-mexico.jpg"); */
+    /* background-image: url("https://s3.amazonaws.com/ArchiveImages/SLJ/2014/09/cover-curiosity-under-the-sea.gif"); */
     background-size: 100%;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -24,19 +29,23 @@ h4 {
 
 #title {
     text-align: center;
-    color: #302e2e;
+    /* color: #302e2e; */
+    color: rgb(204, 204, 204);
     font-size: 7em;
 }
 
 #summary {
     text-align: center;
-    color: #302e2e;
+    /* color: #302e2e; */
+    color: rgb(204, 204, 204);
     font-size: 3em;
 }
 
 #add_site_button {
     margin-left: 4em;
     margin-bottom: 2em;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
 }
 
 #add_site_div {
@@ -51,7 +60,7 @@ h4 {
 
 input {
     padding: 10px;
-    font-size: 18pt;
+    font-size: 20pt;
     color: rgb(204, 204, 204);
     border: 2px solid rgb(204, 204, 204);
     background-color: transparent;
@@ -74,8 +83,8 @@ textarea {
 }
 
 #divider {
-    background-color: #302e2e;
-    padding: 2px;
+    background-color: rgb(204, 204, 204);
+    padding: 1px;
 }
 
 .button {

@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
         renderAddSiteForm();
         document.getElementById("add_site_div").style.display = "block";
         document.getElementById("divider").style.display = "block";
+        document.getElementById("add_site_button").style.display = "none";
+
     });
 
     // fetches all sites from database on page load
@@ -41,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         siteCard.id = site.id;
 
         // create site name
-        const siteName = document.createElement("h2");
+        const siteName = document.createElement("h1");
         siteName.textContent = site.name;
         siteCard.appendChild(siteName);
 
