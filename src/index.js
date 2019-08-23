@@ -11,16 +11,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // endpoint
     URL = "http://localhost:3000/api/v1/sites";
 
+    // hide add site form by default until add site button is clicked
     document.getElementById("add_site_div").style.display = "none";
     document.getElementById("divider").style.display = "none";
 
+    // add event listener for add site button
     document.getElementById("add_site_button").addEventListener("click", () => {
         renderAddSiteForm();
         document.getElementById("add_site_div").style.display = "block";
         document.getElementById("divider").style.display = "block";
         document.getElementById("add_site_button").style.display = "none";
-
+        document.getElementById("login_button").style.display = "none";
     });
+
+    document.getElementById("login_button").addEventListener("click", () => {
+        document.getElementById("add_site_button").style.display = "none";
+        document.getElementById("login_button").style.display = "none";
+        renderLogin();
+    });
+
+    function renderLogin() {
+        const loginForm = document.createElement("form");
+        loginForm.id = "login_form";
+
+        // create user name input
+        const userName = document.createElement("input");
+        userName.placeholder = "Enter You're Name";
+        loginForm.appendChild(userName);
+        document.getElementById("sites_div").prepend(loginForm);
+    }
 
     // fetches all sites from database on page load
     fetch(URL)
@@ -141,12 +160,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create site name input
         const siteName = document.createElement("input");
-        siteName.placeholder = "Site Name";
+        siteName.placeholder = "Enter Site Name";
         addSiteForm.appendChild(siteName);
 
         // create site description input
         const siteDescription = document.createElement("textarea");
-        siteDescription.placeholder = "Site Description";
+        siteDescription.placeholder = "Enter Site Description";
         addSiteForm.appendChild(siteDescription);
 
         // create submit button
@@ -186,5 +205,4 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.log(site);
             });
     }
-    // renderAddSiteForm();
 });

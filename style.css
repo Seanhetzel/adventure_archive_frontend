@@ -48,6 +48,17 @@ h4 {
     backdrop-filter: blur(10px);
 }
 
+#login_form{
+    margin-left: 5em;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+#create_account_button {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
 #add_site_div {
     background-color: transparent;
     padding-left: 5em;
