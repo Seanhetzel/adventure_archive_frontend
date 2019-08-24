@@ -22,23 +22,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Explore button for backround image and summary
     const background_url = [
-        "https://images.unsplash.com/photo-1513193232743-99c890a0e769?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80",
-        "https://images.unsplash.com/photo-1524686975162-f6fb4d39759c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80",
-        "https://s3.amazonaws.com/ArchiveImages/SLJ/2014/09/cover-curiosity-under-the-sea.gif"
+        "https://images.unsplash.com/photo-1513193232743-99c890a0e769?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80", // machu puchu
+        "https://images.unsplash.com/photo-1524686975162-f6fb4d39759c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80", // giza pyramids
+        "https://s3.amazonaws.com/ArchiveImages/SLJ/2014/09/cover-curiosity-under-the-sea.gif", // ocean gif
+        "https://www.nationalgeographic.com/content/dam/news/2018/02/01/lidar-maya/02-lidar-maya.jpg", //
+        "http://andavetedeviaje.com/wp-content/uploads/2018/01/Calakmul-Ruins-Campeche-958x500@2x.jpg", // Calakmul Mayan
+        "https://www.visitmexico.com/viajemospormexico/assets/uploads/actividades/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg", // Maya city of Tikal in Guatemala.
+        "https://mydivepro.com/wp-content/uploads/2019/07/7iEkH2.jpg", // cenote near Tulum - the ancient Mayan city in the Yucatan Peninsula , Mexico.
+        "http://www.planetcustodian.com/wp-content/uploads/2017/03/photographer-ira-meyer-antarctica-photo-collection-3.jpg" // antarctica
     ];
 
     const summary = [
         "Explore The Unknown",
         "Adventure Awaits",
-        "Go Where Few Have Gone Before"
+        "Go Where Few Have Gone Before",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder",
+        "placeholder"
     ];
+
+    // desert
+    // cave
+    // ocean deep
+    // ocean reef
 
     let index = 0;
     document.getElementById("explore_button").addEventListener("click", () => {
         document.body.style.backgroundImage = `url(${background_url[index]})`;
         document.getElementById("summary").textContent = summary[index];
         index++;
-        if (index === 4) {
+        if (index === 9) {
             index = 0;
             document.body.style.backgroundImage =
                 "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
@@ -149,7 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const submitButton = document.createElement("button");
         submitButton.classList.add("button");
         submitButton.id = "login_submit_button";
-        submitButton.textContent = "Submit";
+        submitButton.textContent = "Enter ↵";
         loginForm.appendChild(submitButton);
 
         document.getElementById("buttons_div").appendChild(loginForm);
@@ -179,8 +194,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("add_site_button").style.display =
                     "inline";
                 document.getElementById("explore_button").style.display =
-                    "inline";
-                document.getElementById("login_button").style.display =
                     "inline";
 
                 document.getElementById("login_form").style.display = "none";
