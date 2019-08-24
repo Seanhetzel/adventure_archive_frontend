@@ -13,18 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
     SITES = "/sites"; // sites resource
     USERS = "/users"; // users resource
 
-    // set starting background image
-    document.body.style.backgroundImage =
-        "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
+    // // set starting background image
+    // document.body.style.backgroundImage =
+    //     "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
 
-    // set starting summary
-    document.getElementById("summary").textContent = "Discover Lost Worlds";
+    // // set starting summary
+    // document.getElementById("summary").textContent = "Discover Lost Worlds";
 
-    // set starting image location
-    document.getElementById("image_location").textContent = "Lost city of Petra, Jordan";
+    // // set starting image location
+    // document.getElementById("image_location").textContent =
+    //     "Lost city of Petra, Jordan";
 
     // Explore button for backround image and summary
     const background_url = [
+        "https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80", // petra
         "https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80", // Bali, Indonesia
         "https://images.unsplash.com/photo-1562679299-266edbefd6d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80", // giza pyramids
         "https://images.unsplash.com/photo-1510074232337-05d50fa189ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // chiang mai thailand
@@ -39,20 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     const summary = [
-        "Explore The Unknown",
+        "Discover Lost Worlds",
+        "Experience Forgotten Cultures",
         "Lost In Time",
-        "Go Where Few Have Gone Before",
+        "Experience Nature",
+        "Undiscovered Worlds",
+        "There's Still So Much Out There",
+        "Where Few Have Gone Before",
         "Adventure Awaits",
-        "placeholder",
-        "placeholder",
-        "placeholder",
-        "placeholder",
-        "placeholder",
-        "placeholder",
-        "placeholder"
+        "Alien Worlds",
+        "Get Out There",
+        "The Wild West",
+        "Explore The Unknown"
     ];
 
     const location = [
+        "Lost city of Petra, Jordan",
         "Bali, Indonesia",
         "Great Sphinx of Giza, Egypt",
         "Chiang Mai, Thailand",
@@ -65,8 +69,15 @@ document.addEventListener("DOMContentLoaded", () => {
         "Monument Valley, USA",
         "Cave of Swallows, Mexico"
     ];
+    let min = 0;
+    let max = 12;
+    let random = Math.floor(Math.random() * (+max - +min)) + +min;
+    // set starting background image
+    document.body.style.backgroundImage = `url(${background_url[random]})`;
+    document.getElementById("summary").textContent = summary[random];
+    document.getElementById("image_location").textContent = location[random];
 
-    let index = 0;
+    let index = random + 1;
     document.getElementById("explore_button").addEventListener("click", () => {
         document.body.style.backgroundImage = `url(${background_url[index]})`;
         document.getElementById("summary").textContent = summary[index];
@@ -74,12 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
         index++;
         if (index === 12) {
             index = 0;
-            document.body.style.backgroundImage =
-                "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
-            document.getElementById("summary").textContent =
-                "Discover Lost Worlds";
-                document.getElementById("image_location").textContent = "Lost city of Petra, Jordan";
-
         }
     });
 
