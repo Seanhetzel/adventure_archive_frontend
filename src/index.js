@@ -13,6 +13,40 @@ document.addEventListener("DOMContentLoaded", () => {
     SITES = "/sites"; // sites resource
     USERS = "/users"; // users resource
 
+    // set starting background image
+    document.body.style.backgroundImage =
+        "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
+
+    // set starting summary
+    document.getElementById("summary").textContent = "Discover Lost Worlds";
+
+    // Explore button for backround image and summary
+    const background_url = [
+        "https://images.unsplash.com/photo-1513193232743-99c890a0e769?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80",
+        "https://images.unsplash.com/photo-1524686975162-f6fb4d39759c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80",
+        "https://s3.amazonaws.com/ArchiveImages/SLJ/2014/09/cover-curiosity-under-the-sea.gif"
+    ];
+
+    const summary = [
+        "Explore The Unknown",
+        "Adventure Awaits",
+        "Go Where Few Have Gone Before"
+    ];
+
+    let index = 0;
+    document.getElementById("explore_button").addEventListener("click", () => {
+        document.body.style.backgroundImage = `url(${background_url[index]})`;
+        document.getElementById("summary").textContent = summary[index];
+        index++;
+        if (index === 4) {
+            index = 0;
+            document.body.style.backgroundImage =
+                "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
+            document.getElementById("summary").textContent =
+                "Discover Lost Worlds";
+        }
+    });
+
     // hide add site form by default until add site button is clicked
     document.getElementById("add_site_div").style.display = "none";
     document.getElementById("divider").style.display = "none";
@@ -143,16 +177,17 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(user => {
                 document.getElementById("add_site_button").style.display =
-                    "block";
+                    "inline";
                 document.getElementById("explore_button").style.display =
-                    "block";
-                document.getElementById("login_button").style.display = "block";
+                    "inline";
+                document.getElementById("login_button").style.display =
+                    "inline";
 
                 document.getElementById("login_form").style.display = "none";
                 document.getElementById("header_div").style.marginBottom =
                     "10em";
 
-                document.getElementById("buttons_div").style.display = "block";
+                document.getElementById("buttons_div").style.display = "inline";
 
                 document.getElementById("user_name").textContent = user.name;
 
@@ -213,9 +248,10 @@ document.addEventListener("DOMContentLoaded", () => {
         siteComments.textContent = `View All ${1} Comments`;
 
         let comment = document.createElement("ul");
-        comment.textContent = "test comment";
+        comment.textContent = "test comment 1";
         siteComments.appendChild(comment);
 
+        siteComments.style.display = "block";
         siteCard.appendChild(siteComments);
 
         // create delete button for site
