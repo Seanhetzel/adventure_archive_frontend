@@ -45,6 +45,15 @@ h4 {
     font-size: 3em;
 }
 
+#app_purpose{
+    text-align: center;
+}
+
+#image_location{
+    float: right;
+    margin-right: 5em;
+}
+
 #add_site_button {
     margin-left: 4em;
     margin-bottom: 2em;
@@ -68,7 +77,7 @@ h4 {
     padding-bottom: 2px;
     font-size: 14pt;
     margin-left: 4em;
-    margin-top: 6.5em;
+    margin-top: 7.5em;
     margin-bottom: 1.9em;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -76,7 +85,7 @@ h4 {
 
 #login_submit_button {
     margin-top: 10px;
-    margin-top: 6.5em;
+    margin-top: 7.5em;
     margin-bottom: 1.9em;
     margin-left: 3px;
     -webkit-backdrop-filter: blur(10px);

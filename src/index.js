@@ -20,22 +20,31 @@ document.addEventListener("DOMContentLoaded", () => {
     // set starting summary
     document.getElementById("summary").textContent = "Discover Lost Worlds";
 
+    // set starting image location
+    document.getElementById("image_location").textContent = "Lost city of Petra, Jordan";
+
     // Explore button for backround image and summary
     const background_url = [
-        "https://images.unsplash.com/photo-1513193232743-99c890a0e769?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80", // machu puchu
-        "https://images.unsplash.com/photo-1524686975162-f6fb4d39759c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80", // giza pyramids
-        "https://s3.amazonaws.com/ArchiveImages/SLJ/2014/09/cover-curiosity-under-the-sea.gif", // ocean gif
-        "https://www.nationalgeographic.com/content/dam/news/2018/02/01/lidar-maya/02-lidar-maya.jpg", //
-        "http://andavetedeviaje.com/wp-content/uploads/2018/01/Calakmul-Ruins-Campeche-958x500@2x.jpg", // Calakmul Mayan
+        "https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80", // Bali, Indonesia
+        "https://images.unsplash.com/photo-1562679299-266edbefd6d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80", // giza pyramids
+        "https://images.unsplash.com/photo-1510074232337-05d50fa189ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // chiang mai thailand
+        "https://www.nationalgeographic.com/content/dam/news/2018/02/01/lidar-maya/02-lidar-maya.jpg", // lost mayan city of el mirador
         "https://www.visitmexico.com/viajemospormexico/assets/uploads/actividades/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg", // Maya city of Tikal in Guatemala.
         "https://mydivepro.com/wp-content/uploads/2019/07/7iEkH2.jpg", // cenote near Tulum - the ancient Mayan city in the Yucatan Peninsula , Mexico.
-        "http://www.planetcustodian.com/wp-content/uploads/2017/03/photographer-ira-meyer-antarctica-photo-collection-3.jpg" // antarctica
+        "http://www.planetcustodian.com/wp-content/uploads/2017/03/photographer-ira-meyer-antarctica-photo-collection-3.jpg", // antarctica
+        "https://images.unsplash.com/photo-1526590776442-5541f7dcf2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjI0MX0&auto=format&fit=crop&w=1948&q=80", // Underwater River Flows Through Cenote Along Mexico's Ocean Floor
+        "https://www.tah-heetch.com/wp-content/uploads/get130/98/60-best-free-arizona-desert-wallpapers-wallpaperaccess.jpg", // tucson
+        "http://s1.1zoom.me/b5050/792/Grand_Canyon_Park_USA_Parks_Crag_514944_2560x1440.jpg", // monument vally
+        "https://us-east.manta.joyent.com/condenast/public/cnt-services/production/2015/12/30/568420d667dc82253d9f5ac6_CaveofSwallows-CourtesyVisitMexico.jpg" // Cave of Swallows, Mexico
     ];
 
     const summary = [
         "Explore The Unknown",
-        "Adventure Awaits",
+        "Lost In Time",
         "Go Where Few Have Gone Before",
+        "Adventure Awaits",
+        "placeholder",
+        "placeholder",
         "placeholder",
         "placeholder",
         "placeholder",
@@ -43,22 +52,34 @@ document.addEventListener("DOMContentLoaded", () => {
         "placeholder"
     ];
 
-    // desert
-    // cave
-    // ocean deep
-    // ocean reef
+    const location = [
+        "Bali, Indonesia",
+        "Great Sphinx of Giza, Egypt",
+        "Chiang Mai, Thailand",
+        "Lost Mayan City of El Mirador, Guatemala",
+        "Lost Mayan City of Tikal, Guatemala",
+        "Cenote Near Tulum, Mexico",
+        "Antarctica",
+        "Jellyfish, Ocean Deep",
+        "Tucson, Arizona",
+        "Monument Valley, USA",
+        "Cave of Swallows, Mexico"
+    ];
 
     let index = 0;
     document.getElementById("explore_button").addEventListener("click", () => {
         document.body.style.backgroundImage = `url(${background_url[index]})`;
         document.getElementById("summary").textContent = summary[index];
+        document.getElementById("image_location").textContent = location[index];
         index++;
-        if (index === 9) {
+        if (index === 12) {
             index = 0;
             document.body.style.backgroundImage =
                 "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
             document.getElementById("summary").textContent =
                 "Discover Lost Worlds";
+                document.getElementById("image_location").textContent = "Lost city of Petra, Jordan";
+
         }
     });
 
