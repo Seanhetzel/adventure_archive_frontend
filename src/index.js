@@ -4,6 +4,14 @@
 // const params = `action=parse&page=${topic}&format=json`
 // BASE_URL = endpoint + params + "&origin=*"
 
+// stretch goals:
+// google maps inbed
+// expland list html for comments
+// transition between images
+
+// bugs:
+// hide comments when edit
+
 // document.getElementById("site").textContent = json.parse.text["*"]
 document.addEventListener("DOMContentLoaded", () => {
     console.log("%c DOM Content Loaded and Parsed!", "color: magenta");
@@ -13,96 +21,108 @@ document.addEventListener("DOMContentLoaded", () => {
     SITES = "/sites"; // sites resource
     USERS = "/users"; // users resource
 
-    // // set starting background image
-    // document.body.style.backgroundImage =
-    //     "url('https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80')";
+    //////////////////// Ranom Background Image Start /////////////////////////
+    // COULD BE REFRACTORED HEAVILY:
 
-    // // set starting summary
-    // document.getElementById("summary").textContent = "Discover Lost Worlds";
-
-    // // set starting image location
-    // document.getElementById("image_location").textContent =
-    //     "Lost city of Petra, Jordan";
-
-    // Explore button for backround image and summary
+    // background images
     const background_url = [
-        "https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80", // petra
+        "https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80", // Lost city of Petra, Jordan
         "https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80", // Bali, Indonesia
-        "https://images.unsplash.com/photo-1562679299-266edbefd6d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80", // giza pyramids
-        "https://images.unsplash.com/photo-1510074232337-05d50fa189ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // chiang mai thailand
-        "https://www.nationalgeographic.com/content/dam/news/2018/02/01/lidar-maya/02-lidar-maya.jpg", // lost mayan city of el mirador
-        "https://www.visitmexico.com/viajemospormexico/assets/uploads/actividades/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg", // Maya city of Tikal in Guatemala.
-        "https://mydivepro.com/wp-content/uploads/2019/07/7iEkH2.jpg", // cenote near Tulum - the ancient Mayan city in the Yucatan Peninsula , Mexico.
-        "http://www.planetcustodian.com/wp-content/uploads/2017/03/photographer-ira-meyer-antarctica-photo-collection-3.jpg", // antarctica
-        "https://images.unsplash.com/photo-1526590776442-5541f7dcf2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjI0MX0&auto=format&fit=crop&w=1948&q=80", // Underwater River Flows Through Cenote Along Mexico's Ocean Floor
-        "https://www.tah-heetch.com/wp-content/uploads/get130/98/60-best-free-arizona-desert-wallpapers-wallpaperaccess.jpg", // tucson
-        "http://s1.1zoom.me/b5050/792/Grand_Canyon_Park_USA_Parks_Crag_514944_2560x1440.jpg", // monument vally
+        "https://images.unsplash.com/photo-1562679299-266edbefd6d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80", // Great Sphinx of Giza, Egypt
+        "https://images.unsplash.com/photo-1510074232337-05d50fa189ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // Chiang Mai, Thailand
+        "https://www.nationalgeographic.com/content/dam/news/2018/02/01/lidar-maya/02-lidar-maya.jpg", // Lost Mayan City of El Mirador, Guatemala
+        "https://mydivepro.com/wp-content/uploads/2019/07/7iEkH2.jpg", // Cenote Near Tulum, Mexico
+        "https://www.tah-heetch.com/wp-content/uploads/get130/98/60-best-free-arizona-desert-wallpapers-wallpaperaccess.jpg", // Tucson, Arizona
+        "http://www.planetcustodian.com/wp-content/uploads/2017/03/photographer-ira-meyer-antarctica-photo-collection-3.jpg", // Antarctica
+        "https://images.unsplash.com/photo-1526590776442-5541f7dcf2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjI0MX0&auto=format&fit=crop&w=1948&q=80", // Jellyfish, Ocean Deep
+        "https://www.visitmexico.com/viajemospormexico/assets/uploads/actividades/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg", // Lost Mayan City of Tikal, Guatemala
+        "http://s1.1zoom.me/b5050/792/Grand_Canyon_Park_USA_Parks_Crag_514944_2560x1440.jpg", // Monument Valley, USA
         "https://us-east.manta.joyent.com/condenast/public/cnt-services/production/2015/12/30/568420d667dc82253d9f5ac6_CaveofSwallows-CourtesyVisitMexico.jpg" // Cave of Swallows, Mexico
     ];
 
+    // summaries
     const summary = [
-        "Discover Lost Worlds",
-        "Experience Forgotten Cultures",
-        "Lost In Time",
-        "Experience Nature",
-        "Undiscovered Worlds",
-        "There's Still So Much Out There",
-        "Where Few Have Gone Before",
-        "Adventure Awaits",
-        "Alien Worlds",
-        "Get Out There",
-        "The Wild West",
-        "Explore The Unknown"
+        "Discover Lost Worlds", // Lost city of Petra, Jordan
+        "Experience Forgotten Cultures", // Bali, Indonesia
+        "Lost In Time", // Great Sphinx of Giza, Egypt
+        "Wonder", // Chiang Mai, Thailand
+        "Undiscovered Worlds", // Lost Mayan City of El Mirador, Guatemala
+        "Where Few Have Gone Before", // Cenote Near Tulum, Mexico
+        "Get Out There", // Tucson, Arizona
+        "Adventure Awaits", // Antarctica
+        "Alien Worlds", // Jellyfish, Ocean Deep
+        "There's Still So Much Out There", // Lost Mayan City of Tikal, Guatemala
+        "The Wild West", // Monument Valley, USA
+        "Explore The Unknown" // Cave of Swallows, Mexico
     ];
 
+    // image locations
     const location = [
-        "Lost city of Petra, Jordan",
-        "Bali, Indonesia",
-        "Great Sphinx of Giza, Egypt",
-        "Chiang Mai, Thailand",
-        "Lost Mayan City of El Mirador, Guatemala",
-        "Lost Mayan City of Tikal, Guatemala",
-        "Cenote Near Tulum, Mexico",
-        "Antarctica",
-        "Jellyfish, Ocean Deep",
-        "Tucson, Arizona",
-        "Monument Valley, USA",
-        "Cave of Swallows, Mexico"
+        "Lost city of Petra, Jordan", // Lost city of Petra, Jordan [0]
+        "Bali, Indonesia", // Bali, Indonesia [1]
+        "Great Sphinx of Giza, Egypt", // Great Sphinx of Giza, Egypt [2]
+        "Chiang Mai, Thailand", // Chiang Mai, Thailand [3]
+        "Lost Mayan City of El Mirador, Guatemala", // Lost Mayan City of El Mirador, Guatemala [4]
+        "Cenote Near Tulum, Mexico", // Cenote Near Tulum, Mexico [5]
+        "Tucson, Arizona", // Tucson, Arizona [6]
+        "Antarctica", // Antarctica [7]
+        "Jellyfish, Ocean Deep", // Jellyfish, Ocean Deep [8]
+        "Lost Mayan City of Tikal, Guatemala", // Lost Mayan City of Tikal, Guatemala [9]
+        "Monument Valley, USA", // Monument Valley, USA [10]
+        "Cave of Swallows, Mexico" // Cave of Swallows, Mexico [11]
     ];
+
+    // set variable to choose starting backround image randomly
     let min = 0;
     let max = 12;
     let random = Math.floor(Math.random() * (+max - +min)) + +min;
-    // set starting background image
+
+    // set starting background image, summary and location to random
     document.body.style.backgroundImage = `url(${background_url[random]})`;
     document.getElementById("summary").textContent = summary[random];
     document.getElementById("image_location").textContent = location[random];
 
+    // cycle through backround images when explore button is clicked
     let index = random + 1;
     document.getElementById("explore_button").addEventListener("click", () => {
         document.body.style.backgroundImage = `url(${background_url[index]})`;
         document.getElementById("summary").textContent = summary[index];
         document.getElementById("image_location").textContent = location[index];
+
+        if (index === 2 || index === 7) {
+            document.getElementById("title").style.color = "#302e2e";
+            document.getElementById("summary").style.color = "#302e2e";
+            document.getElementById("image_location").style.color = "#302e2e";
+            document.getElementById("app_purpose").style.color = "#302e2e";
+        } else {
+            document.getElementById("title").style.color = "rgb(204, 204, 204)";
+            document.getElementById("summary").style.color =
+                "rgb(204, 204, 204)";
+            document.getElementById("image_location").style.color =
+                "rgb(204, 204, 204)";
+
+            document.getElementById("app_purpose").style.color =
+                "rgb(204, 204, 204)";
+        }
+
         index++;
         if (index === 12) {
             index = 0;
         }
     });
+    /////////////////////// Ranom Background Image End ////////////////////////
 
     // hide add site form by default until add site button is clicked
     document.getElementById("add_site_div").style.display = "none";
     document.getElementById("divider").style.display = "none";
 
-    ///////////////////////////// ADD SITE START //////////////////////////////////
+    ///////////////////////////// ADD SITE START //////////////////////////////
     // add event listener for add site button
     document.getElementById("add_site_button").addEventListener("click", () => {
-        renderAddSiteForm();
         document.getElementById("add_site_div").style.display = "block";
         document.getElementById("divider").style.display = "block";
-        // document.getElementById("add_site_button").style.display = "none";
-        // document.getElementById("explore_button").style.display = "none";
-        // document.getElementById("login_button").style.display = "none";
         document.getElementById("buttons_div").style.display = "none";
-
+        document.getElementById("divider_top").style.display = "block";
         document.getElementById("divider_top").style.marginTop = "14.4em";
     });
 
@@ -122,6 +142,17 @@ document.addEventListener("DOMContentLoaded", () => {
         siteDescription.placeholder = "Enter Site Description";
         addSiteForm.appendChild(siteDescription);
 
+        // BUG: NEED TO CLICK ESC WITHOUT SUBMITTING AN EMPTY FORM
+        // create escape button
+        // const escapeButton = document.createElement("button");
+        // escapeButton.classList.add("button");
+        // escapeButton.id = "escape_button";
+        // escapeButton.textContent = "Esc";
+        // escapeButton.addEventListener("click", () => {
+        //     document.getElementById("add_site_div").style.display = "none";
+        // });
+        // addSiteForm.prepend(escapeButton);
+
         // create submit button
         const submitButton = document.createElement("button");
         submitButton.classList.add("button");
@@ -137,6 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             addSiteForm.reset();
         });
     }
+    renderAddSiteForm();
 
     // fetch POST to send form data from add_site_form to database
     function addSite(event) {
@@ -155,9 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(site => {
                 document.getElementById("add_site_div").style.display = "none";
                 document.getElementById("buttons_div").style.display = "block";
-                // document.getElementById("divider_top").style.marginTop = "0em";
                 document.getElementById("divider_top").style.display = "none";
-
                 document.getElementById("sites_div").prepend(renderSite(site));
 
                 console.log(site);
@@ -259,11 +289,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create site name
         const siteName = document.createElement("h1");
+        siteName.id = "site_name";
         siteName.textContent = site.name;
         siteCard.appendChild(siteName);
 
         // create site description
         const siteDescription = document.createElement("p");
+        siteDescription.id = "site_description";
         siteDescription.textContent = site.description;
         siteCard.appendChild(siteDescription);
 
@@ -282,16 +314,29 @@ document.addEventListener("DOMContentLoaded", () => {
         siteCard.appendChild(editButton);
 
         // create comments link
-        let siteComments = document.createElement("a");
+        let siteComments = document.createElement("p");
         siteComments.id = "site_comments";
+        siteComments.style.cursor = "pointer";
         siteComments.textContent = `View All ${1} Comments`;
+        siteComments.addEventListener("click", () => {
+            commentList.style.display = "block";
+        });
 
-        let comment = document.createElement("ul");
-        comment.textContent = "test comment 1";
-        siteComments.appendChild(comment);
+        const commentList = document.createElement("ul");
 
-        siteComments.style.display = "block";
+        const comment1 = document.createElement("ul");
+        comment1.textContent = "Sean test comment 1";
+        commentList.appendChild(comment1);
+
+        const comment2 = document.createElement("ul");
+        comment2.textContent = "Jackoline test comment 2";
+        commentList.appendChild(comment2);
+
+        commentList.style.display = "none";
+
         siteCard.appendChild(siteComments);
+
+        siteCard.appendChild(commentList);
 
         // create delete button for site
         const deleteButton = document.createElement("button");
