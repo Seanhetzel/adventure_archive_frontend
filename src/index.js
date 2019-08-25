@@ -303,7 +303,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return response.json();
         })
         .then(function(json) {
-            console.log(json);
             json.forEach(site => {
                 document.getElementById("sites_div").prepend(renderSite(site));
             });
@@ -346,15 +345,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         siteCard.appendChild(editButton);
 
-        // create comments link
         let siteComments = document.createElement("p");
         siteComments.style.cursor = "pointer";
-        siteComments.textContent = `View All ${1} Comments`;
         siteComments.addEventListener("click", () => {
             commentList.style.display = "block";
         });
 
-        const commentList = document.createElement("ul");
+        const commentList = document.createElement("div");
 
         // get all comments for site
         fetch(BASE_URL + COMMENTS)
@@ -362,14 +359,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 return response.json();
             })
             .then(function(json) {
-                console.log(json);
+                // console.log(json.length);
+                
+                let comment_count = 0;
                 json.forEach(comment => {
                     if (comment.site_id === site.id) {
-                        console.log(`${comment.content}: ${comment.username}`);
+                        comment_count++;
+                        // console.log(comment);
+
                         renderComment(comment, commentList);
                     }
+                    siteComments.textContent = `View All ${comment_count} Comments`;
                 });
             });
+
+        // create comments link
+
         // const comment1 = document.createElement("ul");
         // comment1.textContent = "Sean test comment 1";
         // commentList.appendChild(comment1);
@@ -402,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         commentForm.addEventListener("submit", event => {
             event.preventDefault();
-            console.log(event);
+            // console.log(event);
             addCommentFetch(event, site);
             commentForm.reset();
         });
@@ -421,19 +426,17 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteButton.style.display = "none";
 
         // append all site nodes to site card
-        console.log(siteCard);
+        // console.log(siteCard);
         return siteCard;
     }
     ///////////////////////////// RENDER SITE(S) END //////////////////////////////
     //////////////////////// RENDER COMMENT(S) START //////////////////////////////
     function renderComment(comment, commentList) {
-        let commentContent = document.createElement("ul")
-        commentContent.textContent = `${comment.username} - ${comment.content}`
-        commentList.appendChild(commentContent)
+        let commentContent = document.createElement("ul");
+        commentContent.innerHTML = `<p><b>${comment.username}</b><br> ${comment.content}</p>`;
+        commentList.appendChild(commentContent);
     }
-
     ////////////////////////// RENDER COMMENT(S) END //////////////////////////////
-
     ///////////////////////////// EDIT SITE START /////////////////////////////////
 
     // create edit form for site when user hits edit button
@@ -482,7 +485,7 @@ document.addEventListener("DOMContentLoaded", () => {
         })
             .then(response => response.json())
             .then(site => {
-                console.log(site);
+                // console.log(site);
                 document.getElementById(site.id).replaceWith(renderSite(site));
             });
     }
