@@ -150,6 +150,17 @@ textarea {
     /* cursor: pointer; */
 }
 
+#comment_input {
+    padding-top: 5px;
+    padding-bottom: 2px;
+    font-size: 14pt;
+    width: 30em;
+}
+
+#comment_submit_button {
+    margin-left: 3px;
+}
+
 #delete_button {
     float: right;
 }

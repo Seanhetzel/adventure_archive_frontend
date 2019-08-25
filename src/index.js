@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     BASE_URL = "http://localhost:3000/api/v1/"; // base URL
     SITES = "/sites"; // sites resource
     USERS = "/users"; // users resource
+    COMMENTS = "/comments"; // comments resource
 
     //////////////////// Ranom Background Image Start /////////////////////////
     // COULD BE REFRACTORED HEAVILY:
@@ -35,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // "http://www.planetcustodian.com/wp-content/uploads/2017/03/photographer-ira-meyer-antarctica-photo-collection-3.jpg", // Antarctica
         "https://images.unsplash.com/photo-1526590776442-5541f7dcf2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjI0MX0&auto=format&fit=crop&w=1948&q=80", // Jellyfish, Ocean Deep
         // "https://www.visitmexico.com/viajemospormexico/assets/uploads/actividades/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg", // Lost Mayan City of Tikal, Guatemala
+        "https://images.unsplash.com/photo-1521706862577-47b053587f91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80", // jungle
         "http://s1.1zoom.me/b5050/792/Grand_Canyon_Park_USA_Parks_Crag_514944_2560x1440.jpg", // Monument Valley, USA
         "https://us-east.manta.joyent.com/condenast/public/cnt-services/production/2015/12/30/568420d667dc82253d9f5ac6_CaveofSwallows-CourtesyVisitMexico.jpg", // Cave of Swallows, Mexico
         "https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80" // Bali, Indonesia
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // "Adventure Awaits", // Antarctica
         "Alien Worlds", // Jellyfish, Ocean Deep
         // "There's Still So Much Out There", // Lost Mayan City of Tikal, Guatemala
+        "Adventure Awaits", // jungle
         "The Wild West", // Monument Valley, USA
         "Explore The Unknown", // Cave of Swallows, Mexico
         "Experience Forgotten Cultures" // Bali, Indonesia
@@ -67,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // "Antarctica", // Antarctica [6]
         "Jellyfish, Ocean Deep", // Jellyfish, Ocean Deep [7]
         // "Lost Mayan City of Tikal, Guatemala", // Lost Mayan City of Tikal, Guatemala [8]
+        "A Jungle, Somewhere", // jungle
         "Monument Valley, USA", // Monument Valley, USA [9]
         "Cave of Swallows, Mexico", // Cave of Swallows, Mexico [10]
         "Bali, Indonesia" // Bali, Indonesia [11]
@@ -74,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // set variable to choose starting backround image randomly
     let min = 0;
-    let max = 8;
+    let max = 9;
     let random = Math.floor(Math.random() * (+max - +min)) + +min;
 
     // set starting background image, summary and location to random
@@ -107,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // }
 
         index++;
-        if (index === 9) {
+        if (index === 10) {
             index = 0;
         }
     });
@@ -261,8 +265,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 document.getElementById("user_name").textContent = user.name;
 
+                window.USERNAME = user.name; // global variable to hold user name
+
                 console.log(user);
             });
+
+        // get user id from database
+        fetch(BASE_URL + USERS)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                console.log(json);
+                json.forEach(user => {
+                    window.USER_ID = user.id; // global variable to hold user id
+                    // console.log(user.id)
+                });
+            });
+        // fetch(BASE_URL + COMMENTS)
+        // .then(function(response) {
+        //     return response.json();
+        // })
+        // .then(function(json) {
+        //     console.log(json);
+        //     json.forEach(comment => {
+        //         console.log(comment.user_id)
+        //     });
+        // });
     }
 
     ///////////////////////////// LOGIN END ///////////////////////////////////////
@@ -311,12 +340,14 @@ document.addEventListener("DOMContentLoaded", () => {
             siteCard.appendChild(deleteButton);
             siteName.style.display = "none";
             siteDescription.style.display = "none";
+            siteComments.style.display = "none";
+            commentList.style.display = "none";
+            commentForm.style.display = "none";
         });
         siteCard.appendChild(editButton);
 
         // create comments link
         let siteComments = document.createElement("p");
-        siteComments.id = "site_comments";
         siteComments.style.cursor = "pointer";
         siteComments.textContent = `View All ${1} Comments`;
         siteComments.addEventListener("click", () => {
@@ -325,19 +356,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const commentList = document.createElement("ul");
 
-        const comment1 = document.createElement("ul");
-        comment1.textContent = "Sean test comment 1";
-        commentList.appendChild(comment1);
+        // get all comments for site
+        fetch(BASE_URL + COMMENTS)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                console.log(json);
+                json.forEach(comment => {
+                    if (comment.site_id === site.id) {
+                        console.log(`${comment.content}: ${comment.username}`);
+                        renderComment(comment, commentList);
+                    }
+                });
+            });
+        // const comment1 = document.createElement("ul");
+        // comment1.textContent = "Sean test comment 1";
+        // commentList.appendChild(comment1);
 
-        const comment2 = document.createElement("ul");
-        comment2.textContent = "Jackoline test comment 2";
-        commentList.appendChild(comment2);
+        // const comment2 = document.createElement("ul");
+        // comment2.textContent = "Jackoline test comment 2";
+        // commentList.appendChild(comment2);
 
         commentList.style.display = "none";
 
         siteCard.appendChild(siteComments);
 
         siteCard.appendChild(commentList);
+
+        // create comment form to add a comment
+        const commentForm = document.createElement("form");
+
+        // create input for comment
+        const commentInput = document.createElement("input");
+        commentInput.id = "comment_input";
+        commentInput.placeholder = "Add a comment...";
+        commentForm.appendChild(commentInput);
+
+        // create submit button for comment
+        const submitCommentButton = document.createElement("button");
+        submitCommentButton.classList.add("button");
+        submitCommentButton.id = "comment_submit_button";
+        submitCommentButton.textContent = "Enter ↵";
+        commentForm.appendChild(submitCommentButton);
+
+        commentForm.addEventListener("submit", event => {
+            event.preventDefault();
+            console.log(event);
+            addCommentFetch(event, site);
+            commentForm.reset();
+        });
+
+        siteCard.appendChild(commentForm);
 
         // create delete button for site
         const deleteButton = document.createElement("button");
@@ -355,6 +425,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return siteCard;
     }
     ///////////////////////////// RENDER SITE(S) END //////////////////////////////
+    //////////////////////// RENDER COMMENT(S) START //////////////////////////////
+    function renderComment(comment, commentList) {
+        let commentContent = document.createElement("ul")
+        commentContent.textContent = `${comment.username} - ${comment.content}`
+        commentList.appendChild(commentContent)
+    }
+
+    ////////////////////////// RENDER COMMENT(S) END //////////////////////////////
+
     ///////////////////////////// EDIT SITE START /////////////////////////////////
 
     // create edit form for site when user hits edit button
@@ -407,5 +486,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById(site.id).replaceWith(renderSite(site));
             });
     }
-    ///////////////////////////// EDIT SITE END ///////////////////////////////////
+    ///////////////////////////// EDIT SITE END ///////////////////////////////
+    ///////////////////////////// ADD COMMENT START ///////////////////////////
+
+    function addCommentFetch(event, site) {
+        fetch(`${BASE_URL + COMMENTS}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            },
+            body: JSON.stringify({
+                user_id: window.USER_ID, // user_id
+                site_id: site.id, // site_id
+                content: event.target[0].value, // comments content
+                username: window.USERNAME // username string
+            })
+        })
+            .then(response => response.json())
+            .then(comment => {
+                console.log(comment);
+                document.getElementById(site.id).replaceWith(renderSite(site));
+            });
+    }
+    ///////////////////////////// ADD COMMENT END /////////////////////////////
 });
