@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("%c DOM Content Loaded and Parsed!", "color: magenta");
 
     // URLs
-    BASE_URL = "http://localhost:3000/api/v1/"; // base URL
+    // BASE_URL = "http://localhost:3000/api/v1/"; // base URL
+    BASE_URL = "http://dry-sands-78217.herokuapp.com/api/v1"
     SITES = "/sites"; // sites resource
     USERS = "/users"; // users resource
     COMMENTS = "/comments"; // comments resource
