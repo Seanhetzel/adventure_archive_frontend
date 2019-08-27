@@ -4,13 +4,16 @@
 // const params = `action=parse&page=${topic}&format=json`
 // BASE_URL = endpoint + params + "&origin=*"
 
-// stretch goals:
+// STRETCH GOALS:
 // google maps inbed
-// expland list html for comments
 // transition between images
+// add transition animation to add site div
 
-// bugs:
-// hide comments when edit
+// BUGS:
+// [ ] show comments after editing a site
+// [ ] keep comments explaned when add new comment
+// [ ] throw error is comment, username, site name or description is blank
+// [ ] throw error if not logged in when add comment
 
 // document.getElementById("site").textContent = json.parse.text["*"]
 document.addEventListener("DOMContentLoaded", () => {
@@ -134,7 +137,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // render form to add new site
     function renderAddSiteForm() {
         const addSiteForm = document.createElement("form");
-
         addSiteForm.id = "add_site_form";
 
         // create site name input
@@ -163,7 +165,6 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.classList.add("button");
         submitButton.textContent = "Submit";
         addSiteForm.appendChild(submitButton);
-
         document.getElementById("add_site_div").appendChild(addSiteForm);
 
         // add event listener to form and give form data to addSite
@@ -194,10 +195,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("buttons_div").style.display = "block";
                 document.getElementById("divider_top").style.display = "none";
                 document.getElementById("sites_div").prepend(renderSite(site));
-
                 console.log(site);
             });
     }
+
     ///////////////////////////// ADD SITE END ////////////////////////////////////
     ///////////////////////////// LOGIN START /////////////////////////////////////
 
@@ -212,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderLogin() {
         const loginForm = document.createElement("form");
-
         loginForm.id = "login_form";
 
         // create user name input
@@ -227,7 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
         submitButton.id = "login_submit_button";
         submitButton.textContent = "Enter ↵";
         loginForm.appendChild(submitButton);
-
         document.getElementById("buttons_div").appendChild(loginForm);
 
         // add event listener to form and give form data to addUser
@@ -256,17 +255,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     "inline";
                 document.getElementById("explore_button").style.display =
                     "inline";
-
                 document.getElementById("login_form").style.display = "none";
                 document.getElementById("header_div").style.marginBottom =
                     "10em";
-
                 document.getElementById("buttons_div").style.display = "inline";
-
                 document.getElementById("user_name").textContent = user.name;
-
                 window.USERNAME = user.name; // global variable to hold user name
-
                 console.log(user);
             });
 
@@ -282,16 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     // console.log(user.id)
                 });
             });
-        // fetch(BASE_URL + COMMENTS)
-        // .then(function(response) {
-        //     return response.json();
-        // })
-        // .then(function(json) {
-        //     console.log(json);
-        //     json.forEach(comment => {
-        //         console.log(comment.user_id)
-        //     });
-        // });
     }
 
     ///////////////////////////// LOGIN END ///////////////////////////////////////
@@ -313,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // create site card
         const siteCard = document.createElement("div");
         siteCard.classList.add("site_card_div");
-
         siteCard.id = site.id;
 
         // create site name
@@ -345,13 +328,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         siteCard.appendChild(editButton);
 
+        // render comments
         let siteComments = document.createElement("p");
+        siteComments.classList.add("collapsible");
         siteComments.style.cursor = "pointer";
-        siteComments.addEventListener("click", () => {
-            commentList.style.display = "block";
-        });
 
+        // create div for site comments
         const commentList = document.createElement("div");
+        commentList.classList.add("content");
+
+        // KEEP INCASE TOGGLE TRANSITION ANIMATIONS FAIL:
+        // siteComments.addEventListener("click", () => {
+        //     commentList.style.display = "block";
+        // });
 
         // get all comments for site
         fetch(BASE_URL + COMMENTS)
@@ -360,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(function(json) {
                 // console.log(json.length);
-                
+
                 let comment_count = 0;
                 json.forEach(comment => {
                     if (comment.site_id === site.id) {
@@ -369,24 +358,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         renderComment(comment, commentList);
                     }
-                    siteComments.textContent = `View All ${comment_count} Comments`;
+                    if (comment_count > 0) {
+                        siteComments.textContent = `View All ${comment_count} Comments`;
+                    } else {
+                        siteComments.textContent = "Be the first to comment:";
+                    }
                 });
             });
 
-        // create comments link
-
-        // const comment1 = document.createElement("ul");
-        // comment1.textContent = "Sean test comment 1";
-        // commentList.appendChild(comment1);
-
-        // const comment2 = document.createElement("ul");
-        // comment2.textContent = "Jackoline test comment 2";
-        // commentList.appendChild(comment2);
-
-        commentList.style.display = "none";
+        // KEEP INCASE TOGGLE TRANSITION ANIMATIONS FAIL:
+        // commentList.style.display = "none";
 
         siteCard.appendChild(siteComments);
-
         siteCard.appendChild(commentList);
 
         // create comment form to add a comment
@@ -411,8 +394,18 @@ document.addEventListener("DOMContentLoaded", () => {
             addCommentFetch(event, site);
             commentForm.reset();
         });
-
         siteCard.appendChild(commentForm);
+
+        // add toggle animation for showing/hiding comments list
+        siteComments.addEventListener("click", function() {
+            this.classList.toggle("active");
+            let content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
 
         // create delete button for site
         const deleteButton = document.createElement("button");
@@ -424,9 +417,6 @@ document.addEventListener("DOMContentLoaded", () => {
             siteCard.remove();
         });
         deleteButton.style.display = "none";
-
-        // append all site nodes to site card
-        // console.log(siteCard);
         return siteCard;
     }
     ///////////////////////////// RENDER SITE(S) END //////////////////////////////
@@ -485,7 +475,6 @@ document.addEventListener("DOMContentLoaded", () => {
         })
             .then(response => response.json())
             .then(site => {
-                // console.log(site);
                 document.getElementById(site.id).replaceWith(renderSite(site));
             });
     }
