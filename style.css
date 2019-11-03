@@ -5,7 +5,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center;
+    background-position: center center;
     background-color: #302e2e;
     -webkit-transition: background-image 0.5s ease-in-out;
     transition: background-image 0.5s ease-in-out;
@@ -19,6 +19,7 @@ ul,
 li,
 h1,
 h2,
+h3,
 h4 {
     font-family: sans-serif;
     color: white;

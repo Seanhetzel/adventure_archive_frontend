@@ -6,7 +6,6 @@
 
 // STRETCH GOALS:
 // google maps inbed
-// transition between images
 // add transition animation to add site div
 
 // BUGS:
@@ -21,102 +20,129 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // URLs
     // BASE_URL = "http://localhost:3000/api/v1/"; // base URL
-    BASE_URL = "https://dry-sands-78217.herokuapp.com/api/v1"
+    BASE_URL = "https://dry-sands-78217.herokuapp.com/api/v1";
     SITES = "/sites"; // sites resource
     USERS = "/users"; // users resource
     COMMENTS = "/comments"; // comments resource
 
     //////////////////// Ranom Background Image Start /////////////////////////
-    // COULD BE REFRACTORED HEAVILY:
-
-    // background images
-    const background_url = [
-        "https://images.unsplash.com/photo-1554322662-abedea4ed292?ixlib=rb-1.2.1&auto=format&fit=crop&w=2890&q=80", // Lost city of Petra, Jordan
-        "https://images.unsplash.com/photo-1533258447399-fb8d1f081ec8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1875&q=80", // Tucson, Arizona
-        // "https://images.unsplash.com/photo-1562679299-266edbefd6d7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80", // Great Sphinx of Giza, Egypt
-        "https://images.unsplash.com/photo-1510074232337-05d50fa189ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80", // Chiang Mai, Thailand
-        "https://www.nationalgeographic.com/content/dam/news/2018/02/01/lidar-maya/02-lidar-maya.jpg", // Lost Mayan City of El Mirador, Guatemala
-        "https://mydivepro.com/wp-content/uploads/2019/07/7iEkH2.jpg", // Cenote Near Tulum, Mexico
-        // "http://www.planetcustodian.com/wp-content/uploads/2017/03/photographer-ira-meyer-antarctica-photo-collection-3.jpg", // Antarctica
-        "https://images.unsplash.com/photo-1526590776442-5541f7dcf2c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjI0MX0&auto=format&fit=crop&w=1948&q=80", // Jellyfish, Ocean Deep
-        // "https://www.visitmexico.com/viajemospormexico/assets/uploads/actividades/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg", // Lost Mayan City of Tikal, Guatemala
-        "https://images.unsplash.com/photo-1521706862577-47b053587f91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1952&q=80", // jungle
-        "http://s1.1zoom.me/b5050/792/Grand_Canyon_Park_USA_Parks_Crag_514944_2560x1440.jpg", // Monument Valley, USA
-        "https://us-east.manta.joyent.com/condenast/public/cnt-services/production/2015/12/30/568420d667dc82253d9f5ac6_CaveofSwallows-CourtesyVisitMexico.jpg", // Cave of Swallows, Mexico
-        "https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2700&q=80" // Bali, Indonesia
-    ];
-
-    // summaries
-    const summary = [
-        "Discover Lost Worlds", // Lost city of Petra, Jordan
-        "Get Out There", // Tucson, Arizona
-        // "Lost In Time", // Great Sphinx of Giza, Egypt
-        "Wonder", // Chiang Mai, Thailand
-        "Undiscovered Worlds", // Lost Mayan City of El Mirador, Guatemala
-        "Where Few Have Gone Before", // Cenote Near Tulum, Mexico
-        // "Adventure Awaits", // Antarctica
-        "Alien Worlds", // Jellyfish, Ocean Deep
-        // "There's Still So Much Out There", // Lost Mayan City of Tikal, Guatemala
-        "Adventure Awaits", // jungle
-        "The Wild West", // Monument Valley, USA
-        "Explore The Unknown", // Cave of Swallows, Mexico
-        "Experience Forgotten Cultures" // Bali, Indonesia
-    ];
-
-    // image locations
-    const location = [
-        "Lost city of Petra, Jordan", // Lost city of Petra, Jordan [0]
-        "Tucson, Arizona", // Tucson, Arizona [1]
-        // "Great Sphinx of Giza, Egypt", // Great Sphinx of Giza, Egypt [2]
-        "Chiang Mai, Thailand", // Chiang Mai, Thailand [3]
-        "Lost Mayan City of El Mirador, Guatemala", // Lost Mayan City of El Mirador, Guatemala [4]
-        "Cenote Near Tulum, Mexico", // Cenote Near Tulum, Mexico [5]
-        // "Antarctica", // Antarctica [6]
-        "Jellyfish, Ocean Deep", // Jellyfish, Ocean Deep [7]
-        // "Lost Mayan City of Tikal, Guatemala", // Lost Mayan City of Tikal, Guatemala [8]
-        "A Jungle, Somewhere", // jungle
-        "Monument Valley, USA", // Monument Valley, USA [9]
-        "Cave of Swallows, Mexico", // Cave of Swallows, Mexico [10]
-        "Bali, Indonesia" // Bali, Indonesia [11]
-    ];
+    const prettyStuff = {
+        1: {
+            location: "Lost city of Petra, Jordan",
+            summary: "Discover Lost Worlds",
+            image:
+                "src/background-images/photo-1554322662-abedea4ed292.jpg"
+        },
+        2: {
+            location: "Tucson, Arizona",
+            summary: "Get Out There",
+            image:
+                "src/background-images/photo-1533258447399-fb8d1f081ec8.jpg"
+        },
+        3: {
+            location: "Machu Picchu, Peru",
+            summary: "Lost In Time",
+            image:
+                "src/background-images/photo-1497106636505-e4fd6e16d74c.jpg"
+        },
+        4: {
+            location: "Chiang Mai, Thailand",
+            summary: "Wonder",
+            image:
+                "src/background-images/photo-1510074232337-05d50fa189ba.jpg"
+        },
+        5: {
+            location: "Lost Mayan City of El Mirador, Guatemala",
+            summary: "Undiscovered Worlds",
+            image:
+                "src/background-images/02-lidar-maya.jpg"
+        },
+        6: {
+            location: "Cenote Near Tulum, Mexico",
+            summary: "Where Few Have Gone Before",
+            image: "src/background-images/7iEkH2.jpg"
+        },
+        7: {
+            location: "Skógafoss, Iceland",
+            summary: "Solitude",
+            image:
+                "src/background-images/photo-1520637102912-2df6bb2aec6d.jpg"
+        },
+        8: {
+            location: "Jellyfish, Ocean Deep",
+            summary: "Alien Worlds",
+            image:
+                "src/background-images/photo-1526590776442-5541f7dcf2c8.jpg"
+        },
+        9: {
+            location: "Lost Mayan City of Tikal, Guatemala",
+            summary: "The Trill Of Adventure",
+            image:
+                "src/background-images/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg"
+        },
+        10: {
+            location: "Giza, Egypt",
+            summary: "Forgotten Monoliths",
+            image:
+                "src/background-images/photo-1544815521-80841127c00f.jpg"
+        },
+        11: {
+            location: "Dahab, Egypt",
+            summary: "Calm Beneath The Waves",
+            image:
+                "src/background-images/photo-1552134792-39312eb5887b.jpg"
+        },
+        12: {
+            location: "A Jungle, Somewhere",
+            summary: "Adventure Awaits",
+            image:
+                "src/background-images/photo-1521706862577-47b053587f91.jpg"
+        },
+        13: {
+            location: "Monument Valley, United States",
+            summary: "Endless Expanse",
+            image:
+                "src/background-images/photo-1510922923694-5a9fca94dc4a.jpg"
+        },
+        14: {
+            location: "Cave of Swallows, Mexico",
+            summary: "Explore The Unknown",
+            image:
+                "src/background-images/568420d667dc82253d9f5ac6_CaveofSwallows-CourtesyVisitMexico.jpg"
+        },
+        15: {
+            location: "Bali, Indonesia",
+            summary: "Find Forgotten Cultures",
+            image:
+                "src/background-images/photo-1544642058-c5d172ab955c.jpg"
+        }
+    };
 
     // set variable to choose starting backround image randomly
     let min = 0;
-    let max = 9;
+    let max = 15;
     let random = Math.floor(Math.random() * (+max - +min)) + +min;
 
     // set starting background image, summary and location to random
-    document.body.style.backgroundImage = `url(${background_url[random]})`;
-    document.getElementById("summary").textContent = summary[random];
-    document.getElementById("image_location").textContent = location[random];
+    document.body.style.backgroundImage = `url(${prettyStuff[random].image})`;
+    document.getElementById("summary").textContent =
+        prettyStuff[random].summary;
+    document.getElementById("image_location").textContent =
+        prettyStuff[random].location;
 
     // cycle through backround images when explore button is clicked
     let index = random + 1;
     document.getElementById("explore_button").addEventListener("click", () => {
-        document.body.style.backgroundImage = `url(${background_url[index]})`;
-        document.getElementById("summary").textContent = summary[index];
-        document.getElementById("image_location").textContent = location[index];
+        document.body.style.backgroundImage = `url(${prettyStuff[index].image})`;
+        document.getElementById("summary").textContent =
+            prettyStuff[index].summary;
+        document.getElementById("image_location").textContent =
+            prettyStuff[index].location;
 
-        // BUG: NEED TO SELECT ALL ELEMENTS
-        // if (index === 2 || index === 7) {
-        //     document.getElementById("title").style.color = "#302e2e";
-        //     document.getElementById("summary").style.color = "#302e2e";
-        //     document.getElementById("image_location").style.color = "#302e2e";
-        //     document.getElementById("app_purpose").style.color = "#302e2e";
-        // } else {
-        //     document.getElementById("title").style.color = "rgb(204, 204, 204)";
-        //     document.getElementById("summary").style.color =
-        //         "rgb(204, 204, 204)";
-        //     document.getElementById("image_location").style.color =
-        //         "rgb(204, 204, 204)";
-
-        //     document.getElementById("app_purpose").style.color =
-        //         "rgb(204, 204, 204)";
-        // }
-
+        // increment through images and reset it when it reaches the end
         index++;
-        if (index === 10) {
-            index = 0;
+        if (index === 16) {
+            index = 1;
         }
     });
     /////////////////////// Ranom Background Image End ////////////////////////
@@ -284,15 +310,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // fetches all sites from database
     function fetchSites() {
-    fetch(BASE_URL + SITES)
-        .then(function(response) {
-            return response.json();
-        })
-        .then(function(json) {
-            json.forEach(site => {
-                document.getElementById("sites_div").prepend(renderSite(site));
+        fetch(BASE_URL + SITES)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(json) {
+                json.forEach(site => {
+                    document
+                        .getElementById("sites_div")
+                        .prepend(renderSite(site));
+                });
             });
-        });
     }
 
     // renders sites
@@ -377,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create comment form to add a comment
         const commentForm = document.createElement("form");
-                
+
         // create input for comment
         const commentInput = document.createElement("input");
         commentInput.id = "comment_input";
@@ -505,5 +533,5 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
     ///////////////////////////// ADD COMMENT END /////////////////////////////
-    fetchSites() // fetch all sites which then calles renderSite()
+    fetchSites(); // fetch all sites which then calles renderSite()
 });
