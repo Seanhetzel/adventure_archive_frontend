@@ -282,7 +282,8 @@ document.addEventListener("DOMContentLoaded", () => {
     ///////////////////////////// LOGIN END ///////////////////////////////////////
     ///////////////////////////// RENDER SITE(S) START ////////////////////////////
 
-    // fetches all sites from database on page load
+    // fetches all sites from database
+    function fetchSites() {
     fetch(BASE_URL + SITES)
         .then(function(response) {
             return response.json();
@@ -292,6 +293,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("sites_div").prepend(renderSite(site));
             });
         });
+    }
 
     // renders sites
     function renderSite(site) {
@@ -503,4 +505,5 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
     ///////////////////////////// ADD COMMENT END /////////////////////////////
+    fetchSites() // fetch all sites which then calles renderSite()
 });
