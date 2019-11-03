@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         15: {
             location: "Bali, Indonesia",
-            summary: "Find Forgotten Cultures",
+            summary: "Forgotten Cultures",
             image:
                 "src/background-images/photo-1544642058-c5d172ab955c.jpg"
         }
