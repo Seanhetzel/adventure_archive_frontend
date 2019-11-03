@@ -16,7 +16,7 @@
 
 // document.getElementById("site").textContent = json.parse.text["*"]
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("%c DOM Content Loaded and Parsed!", "color: magenta");
+    console.log("%c Adventure Archive made by Sean Hetzel", "color: cyan");
 
     // URLs
     // BASE_URL = "http://localhost:3000/api/v1/"; // base URL
