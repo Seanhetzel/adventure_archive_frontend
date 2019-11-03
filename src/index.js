@@ -375,7 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // create comment form to add a comment
         const commentForm = document.createElement("form");
-
+                
         // create input for comment
         const commentInput = document.createElement("input");
         commentInput.id = "comment_input";
