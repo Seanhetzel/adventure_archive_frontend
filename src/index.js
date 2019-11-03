@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // set variable to choose starting backround image randomly
-    let min = 0;
+    let min = 1;
     let max = 15;
     let random = Math.floor(Math.random() * (+max - +min)) + +min;
 
@@ -316,6 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(function(json) {
                 json.forEach(site => {
+                    document.getElementById("loading").style.display = "none";
                     document
                         .getElementById("sites_div")
                         .prepend(renderSite(site));
