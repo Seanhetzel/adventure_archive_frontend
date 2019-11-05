@@ -4,7 +4,7 @@ Platform where users can share archeological sites and amazing places. Its sorta
 
 https://seanhetzel.github.io/adventure_archive_frontend/index.html
 
-![Adventure Archive](github-logo-white.png)
+![Adventure Archive](adventure-archive-screenshot-2.PNG)
 
 # Usage
 
