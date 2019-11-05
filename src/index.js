@@ -3,59 +3,44 @@
 // const topic = "el Mirador"
 // const params = `action=parse&page=${topic}&format=json`
 // BASE_URL = endpoint + params + "&origin=*"
-
-// STRETCH GOALS:
-// google maps inbed
-// add transition animation to add site div
-
-// BUGS:
-// [ ] show comments after editing a site
-// [ ] keep comments explaned when add new comment
-// [ ] throw error is comment, username, site name or description is blank
-// [ ] throw error if not logged in when add comment
-
 // document.getElementById("site").textContent = json.parse.text["*"]
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("%c Adventure Archive made by Sean Hetzel", "color: cyan");
 
     // URLs
-    // BASE_URL = "http://localhost:3000/api/v1/"; // base URL
     BASE_URL = "https://dry-sands-78217.herokuapp.com/api/v1";
     SITES = "/sites"; // sites resource
     USERS = "/users"; // users resource
     COMMENTS = "/comments"; // comments resource
+    sessionStorage.setItem("UserName", ""); // store username in session
 
     //////////////////// Ranom Background Image Start /////////////////////////
     const prettyStuff = {
         1: {
             location: "Lost city of Petra, Jordan",
             summary: "Discover Lost Worlds",
-            image:
-                "src/background-images/photo-1554322662-abedea4ed292.jpg"
+            image: "src/background-images/photo-1554322662-abedea4ed292.jpg"
         },
         2: {
             location: "Tucson, Arizona",
             summary: "Get Out There",
-            image:
-                "src/background-images/photo-1533258447399-fb8d1f081ec8.jpg"
+            image: "src/background-images/photo-1533258447399-fb8d1f081ec8.jpg"
         },
         3: {
             location: "Machu Picchu, Peru",
             summary: "Lost In Time",
-            image:
-                "src/background-images/photo-1497106636505-e4fd6e16d74c.jpg"
+            image: "src/background-images/photo-1497106636505-e4fd6e16d74c.jpg"
         },
         4: {
             location: "Chiang Mai, Thailand",
             summary: "Wonder",
-            image:
-                "src/background-images/photo-1510074232337-05d50fa189ba.jpg"
+            image: "src/background-images/photo-1510074232337-05d50fa189ba.jpg"
         },
         5: {
             location: "Lost Mayan City of El Mirador, Guatemala",
             summary: "Undiscovered Worlds",
-            image:
-                "src/background-images/02-lidar-maya.jpg"
+            image: "src/background-images/02-lidar-maya.jpg"
         },
         6: {
             location: "Cenote Near Tulum, Mexico",
@@ -65,14 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
         7: {
             location: "Skógafoss, Iceland",
             summary: "Solitude",
-            image:
-                "src/background-images/photo-1520637102912-2df6bb2aec6d.jpg"
+            image: "src/background-images/photo-1520637102912-2df6bb2aec6d.jpg"
         },
         8: {
             location: "Jellyfish, Ocean Deep",
             summary: "Alien Worlds",
-            image:
-                "src/background-images/photo-1526590776442-5541f7dcf2c8.jpg"
+            image: "src/background-images/photo-1526590776442-5541f7dcf2c8.jpg"
         },
         9: {
             location: "Lost Mayan City of Tikal, Guatemala",
@@ -83,26 +66,22 @@ document.addEventListener("DOMContentLoaded", () => {
         10: {
             location: "Giza, Egypt",
             summary: "Forgotten Monoliths",
-            image:
-                "src/background-images/photo-1544815521-80841127c00f.jpg"
+            image: "src/background-images/photo-1544815521-80841127c00f.jpg"
         },
         11: {
             location: "Dahab, Egypt",
             summary: "Calm Beneath The Waves",
-            image:
-                "src/background-images/photo-1552134792-39312eb5887b.jpg"
+            image: "src/background-images/photo-1552134792-39312eb5887b.jpg"
         },
         12: {
             location: "A Jungle, Somewhere",
             summary: "Adventure Awaits",
-            image:
-                "src/background-images/photo-1521706862577-47b053587f91.jpg"
+            image: "src/background-images/photo-1521706862577-47b053587f91.jpg"
         },
         13: {
             location: "Monument Valley, United States",
             summary: "Endless Expanse",
-            image:
-                "src/background-images/photo-1510922923694-5a9fca94dc4a.jpg"
+            image: "src/background-images/photo-1510922923694-5a9fca94dc4a.jpg"
         },
         14: {
             location: "Cave of Swallows, Mexico",
@@ -113,8 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         15: {
             location: "Bali, Indonesia",
             summary: "Forgotten Cultures",
-            image:
-                "src/background-images/photo-1544642058-c5d172ab955c.jpg"
+            image: "src/background-images/photo-1544642058-c5d172ab955c.jpg"
         }
     };
 
@@ -224,7 +202,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("buttons_div").style.display = "block";
                 document.getElementById("divider_top").style.display = "none";
                 document.getElementById("sites_div").prepend(renderSite(site));
-                console.log(site);
             });
     }
 
@@ -266,6 +243,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // create logout button
+    function renderLogoutButton() {
+        const logoutButton = document.createElement("button");
+        logoutButton.classList.add("button");
+        logoutButton.id = "logout_button";
+        logoutButton.textContent = "Logout";
+        logoutButton.addEventListener("click", () => {
+            fetchSites();
+            sessionStorage.setItem("UserName", "");
+            document.getElementById("login_button").style.display = "inline";
+            document.getElementById("user_name").textContent = "";
+            logoutButton.style.display = "none";
+        });
+        document.getElementById("buttons_div").appendChild(logoutButton);
+    }
+
     // fetch POST to send form data from login_form to database
     function addUser(event) {
         fetch(BASE_URL + USERS, {
@@ -286,11 +279,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     "inline";
                 document.getElementById("login_form").style.display = "none";
                 document.getElementById("header_div").style.marginBottom =
-                    "10em";
+                    "38vh";
                 document.getElementById("buttons_div").style.display = "inline";
                 document.getElementById("user_name").textContent = user.name;
-                window.USERNAME = user.name; // global variable to hold user name
-                console.log(user);
+                sessionStorage.setItem("UserName", user.name);
+                fetchSites();
+                renderLogoutButton();
             });
 
         // get user id from database
@@ -301,8 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(function(json) {
                 console.log(json);
                 json.forEach(user => {
-                    window.USER_ID = user.id; // global variable to hold user id
-                    // console.log(user.id)
+                    sessionStorage.setItem("UserId", user.id) // store user id in session
                 });
             });
     }
@@ -406,30 +399,35 @@ document.addEventListener("DOMContentLoaded", () => {
         siteCard.appendChild(siteComments);
         siteCard.appendChild(commentList);
 
-        // create comment form to add a comment
-        const commentForm = document.createElement("form");
+        if (sessionStorage.getItem("UserName") != "") {
+            // create comment form to add a comment
+            const commentForm = document.createElement("form");
 
-        // create input for comment
-        const commentInput = document.createElement("input");
-        commentInput.id = "comment_input";
-        commentInput.placeholder = "Add a comment...";
-        commentInput.required = true;
-        commentForm.appendChild(commentInput);
+            // create input for comment
+            const commentInput = document.createElement("input");
+            commentInput.id = "comment_input";
+            commentInput.placeholder = "Add a comment...";
+            commentInput.required = true;
+            commentForm.appendChild(commentInput);
 
-        // create submit button for comment
-        const submitCommentButton = document.createElement("button");
-        submitCommentButton.classList.add("button");
-        submitCommentButton.id = "comment_submit_button";
-        submitCommentButton.textContent = "Enter ↵";
-        commentForm.appendChild(submitCommentButton);
+            // create submit button for comment
+            const submitCommentButton = document.createElement("button");
+            submitCommentButton.classList.add("button");
+            submitCommentButton.id = "comment_submit_button";
+            submitCommentButton.textContent = "Enter ↵";
+            commentForm.appendChild(submitCommentButton);
 
-        commentForm.addEventListener("submit", event => {
-            event.preventDefault();
-            // console.log(event);
-            addCommentFetch(event, site);
-            commentForm.reset();
-        });
-        siteCard.appendChild(commentForm);
+            commentForm.addEventListener("submit", event => {
+                event.preventDefault();
+                addCommentFetch(event, site);
+                commentForm.reset();
+            });
+            siteCard.appendChild(commentForm);
+        } else {
+            const pleaseLogIn = document.createElement("p");
+            pleaseLogIn.textContent = "Please login to comment.";
+            siteCard.appendChild(pleaseLogIn);
+        }
 
         // add toggle animation for showing/hiding comments list
         siteComments.addEventListener("click", function() {
@@ -524,15 +522,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 Accept: "application/json"
             },
             body: JSON.stringify({
-                user_id: window.USER_ID, // user_id
+                user_id: sessionStorage.getItem("UserId"),
                 site_id: site.id, // site_id
                 content: event.target[0].value, // comments content
-                username: window.USERNAME // username string
+                username: sessionStorage.getItem("UserName") // username string
             })
         })
             .then(response => response.json())
             .then(comment => {
-                console.log(comment);
                 document.getElementById(site.id).replaceWith(renderSite(site));
             });
     }

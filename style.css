@@ -88,6 +88,11 @@ h4 {
     backdrop-filter: blur(10px);
 }
 
+#logout_button {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
 #user_name_input {
     padding-top: 0.25em;
     padding-bottom: 0.3em;
