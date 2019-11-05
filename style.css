@@ -26,7 +26,7 @@ h4 {
 }
 
 #header_div {
-    margin-bottom: 40vh;
+    margin-bottom: 38vh;
 }
 
 #contact {
@@ -68,38 +68,39 @@ h4 {
 }
 
 #add_site_button {
-    margin-left: 4em;
+    margin-left: 3.25em;
     margin-bottom: 2em;
+    margin-right: 0.5em;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
 #explore_button {
+    margin-right: 0.5em;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
 #login_button {
     margin-bottom: 2em;
+    margin-right: 0.5em;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
 #user_name_input {
-    padding-top: 5px;
-    padding-bottom: 2px;
-    font-size: 14pt;
-    margin-left: 4em;
-    margin-top: 7.5em;
-    margin-bottom: 1.9em;
+    padding-top: 0.25em;
+    padding-bottom: 0.3em;
+    font-size: 18pt;
+    margin-left: 3.25em;
+    margin-right: 0.5em;
+    margin-bottom: 2em;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
 #login_submit_button {
-    margin-top: 10px;
-    margin-top: 7.5em;
-    margin-bottom: 1.9em;
+    margin-bottom: 2em;
     margin-left: 3px;
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -158,9 +159,10 @@ textarea {
     color: white;
     background-color: transparent;
     padding-top: 0.25em;
+    padding-bottom: 0.25em;
     padding-right: 0.5em;
     padding-left: 0.5em;
-    font-size: 14pt;
+    font-size: 18pt;
     cursor: pointer;
 }
 
@@ -169,9 +171,10 @@ textarea {
 }
 
 #comment_input {
-    padding-top: 5px;
-    padding-bottom: 2px;
-    font-size: 14pt;
+    padding-top: 0.25em;
+    padding-bottom: 0.3em;
+    margin-right: 0.5em;
+    font-size: 18pt;
     width: 30em;
 }
 

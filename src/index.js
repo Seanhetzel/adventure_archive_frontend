@@ -235,7 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("add_site_button").style.display = "none";
         document.getElementById("explore_button").style.display = "none";
         document.getElementById("login_button").style.display = "none";
-        document.getElementById("header_div").style.marginBottom = ".5em";
     });
 
     function renderLogin() {
