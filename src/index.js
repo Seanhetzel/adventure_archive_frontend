@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         9: {
             location: "Lost Mayan City of Tikal, Guatemala",
-            summary: "The Trill Of Adventure",
+            summary: "The Thrill Of Adventure",
             image:
                 "src/background-images/actividades-principales_campeche_campeche_una-aventura-por-la-selva-de-calakmul_01.jpg"
         },
@@ -169,11 +169,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // create site name input
         const siteName = document.createElement("input");
         siteName.placeholder = "Enter Site Name";
+        siteName.required = true;
         addSiteForm.appendChild(siteName);
 
         // create site description input
         const siteDescription = document.createElement("textarea");
         siteDescription.placeholder = "Enter Site Description";
+        siteDescription.required = true;
         addSiteForm.appendChild(siteDescription);
 
         // BUG: NEED TO CLICK ESC WITHOUT SUBMITTING AN EMPTY FORM
@@ -245,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userName = document.createElement("input");
         userName.id = "user_name_input";
         userName.placeholder = "Enter You're Name";
+        userName.required = true;
         loginForm.appendChild(userName);
 
         // create submit button
@@ -410,6 +413,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const commentInput = document.createElement("input");
         commentInput.id = "comment_input";
         commentInput.placeholder = "Add a comment...";
+        commentInput.required = true;
         commentForm.appendChild(commentInput);
 
         // create submit button for comment
