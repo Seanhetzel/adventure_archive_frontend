@@ -71,26 +71,26 @@ h4 {
     margin-left: 3.25em;
     margin-bottom: 2em;
     margin-right: 0.5em;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 #explore_button {
     margin-right: 0.5em;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 #login_button {
     margin-bottom: 2em;
     margin-right: 0.5em;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 #logout_button {
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 #user_name_input {
@@ -100,15 +100,15 @@ h4 {
     margin-left: 3.25em;
     margin-right: 0.5em;
     margin-bottom: 2em;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 #login_submit_button {
     margin-bottom: 2em;
     margin-left: 3px;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 #add_site_div {
@@ -117,8 +117,8 @@ h4 {
     padding-right: 5em;
     padding-top: 2em;
     padding-bottom: 2em;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(100px);
+    backdrop-filter: blur(100px);
 }
 
 input {
