@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     "inline";
                 document.getElementById("login_form").style.display = "none";
                 document.getElementById("header_div").style.marginBottom =
-                    "38vh";
+                    "12em";
                 document.getElementById("buttons_div").style.display = "inline";
                 document.getElementById("user_name").textContent = user.name;
                 sessionStorage.setItem("UserName", user.name);
@@ -295,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(function(json) {
                 console.log(json);
                 json.forEach(user => {
-                    sessionStorage.setItem("UserId", user.id) // store user id in session
+                    sessionStorage.setItem("UserId", user.id); // store user id in session
                 });
             });
     }
@@ -534,5 +534,15 @@ document.addEventListener("DOMContentLoaded", () => {
             });
     }
     ///////////////////////////// ADD COMMENT END /////////////////////////////
-    fetchSites(); // fetch all sites which then calles renderSite()
+    fetchSites(); // fetch all sites which then calles renderSite().
+
+    // parallax scrolling
+    let rellax = new Rellax('.rellax', {
+        speed: -2,
+        center: false,
+        wrapper: null,
+        round: true,
+        vertical: true,
+        horizontal: false
+      });
 });
