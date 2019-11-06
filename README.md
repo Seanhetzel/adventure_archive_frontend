@@ -20,8 +20,22 @@ Users can:
 
 # Roadmap
 
-1. Add Google Maps to automatically locate the archaeological site based on its name and show it on the map.
-2. Git the option to add images to archaeological sites as image URLs.
+1. Add Google Maps to automatically locate the archaeological site based on its name and show it on a map.
+2. Give the option to add images to archaeological sites as image URLs and display them as a carusel.
+
+# Known Bugs/Quick Improvements
+1. Comments disappear after editing sites.
+2. Button shenanigans after you login, then logout, then login again.
+3. Move `delete` button up to align with `done` button.
+4. Add `esc` button to top right of the add site form.
+
+# Attributions 
+1. Parallax Scrolling<br>
+Moe Amaya<br>
+https://github.com/dixonandmoe/rellax
+
+2. Images<br>
+https://unsplash.com/
 
 # Support
 
@@ -29,4 +43,4 @@ seanhetzel1@gmail.com
 
 # Contributing
 
-Contributions welcome
+Contributions welcome.

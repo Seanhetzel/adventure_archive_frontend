@@ -363,11 +363,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const commentList = document.createElement("div");
         commentList.classList.add("content");
 
-        // KEEP INCASE TOGGLE TRANSITION ANIMATIONS FAIL:
-        // siteComments.addEventListener("click", () => {
-        //     commentList.style.display = "block";
-        // });
-
         // get all comments for site
         fetch(BASE_URL + COMMENTS)
             .then(function(response) {
@@ -391,9 +386,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 });
             });
-
-        // KEEP INCASE TOGGLE TRANSITION ANIMATIONS FAIL:
-        // commentList.style.display = "none";
 
         siteCard.appendChild(siteComments);
         siteCard.appendChild(commentList);
