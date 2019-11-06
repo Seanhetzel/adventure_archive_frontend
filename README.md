@@ -28,6 +28,7 @@ Users can:
 2. Button shenanigans after you login, then logout, then login again.
 3. Move `delete` button up to align with `done` button.
 4. Add `esc` button to top right of the add site form.
+5. Background images don't load properly on mobile. Could solve with a media screen query. 
 
 # Attributions 
 1. Parallax Scrolling<br>
