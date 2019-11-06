@@ -96,27 +96,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // sets the background image and pretty stuff
+    function setBackgroundImage(i){
+        document.body.style.backgroundImage = `url(${prettyStuff[i].image})`;
+    document.getElementById("summary").textContent =
+        prettyStuff[i].summary;
+    document.getElementById("image_location").textContent =
+        prettyStuff[i].location;
+    }
+
     // set variable to choose starting backround image randomly
     let min = 1;
     let max = 15;
     let random = Math.floor(Math.random() * (+max - +min)) + +min;
-
     // set starting background image, summary and location to random
-    document.body.style.backgroundImage = `url(${prettyStuff[random].image})`;
-    document.getElementById("summary").textContent =
-        prettyStuff[random].summary;
-    document.getElementById("image_location").textContent =
-        prettyStuff[random].location;
+    setBackgroundImage(random)
 
     // cycle through backround images when explore button is clicked
     let index = random + 1;
     document.getElementById("explore_button").addEventListener("click", () => {
-        document.body.style.backgroundImage = `url(${prettyStuff[index].image})`;
-        document.getElementById("summary").textContent =
-            prettyStuff[index].summary;
-        document.getElementById("image_location").textContent =
-            prettyStuff[index].location;
-
+    setBackgroundImage(index)
         // increment through images and reset it when it reaches the end
         index++;
         if (index === 16) {
