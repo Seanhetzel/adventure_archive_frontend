@@ -313,9 +313,9 @@ textarea {
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1500px) {
     body {
-      /* background-color: lightblue; */
-      background-size: auto;
+      background-color: #00e1ff;
+      /* background-size: auto; */
     }
   }
