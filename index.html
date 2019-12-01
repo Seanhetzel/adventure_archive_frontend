@@ -1,71 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8" />
-        <title>Adventure Archive</title>
-        <link rel="stylesheet" href="./style.css" />
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="favicon-16x16.png"
-        />
-        <link rel="manifest" href="site.webmanifest" />
-        <script src="src/index.js" charset="utf-8"></script>
-        <script src="rellax.min.js"></script>
-    </head>
-    <div>
-        <div id="header_div">
-            <div id="contact">
-                <a
-                    href="https://github.com/Seanhetzel/adventure_archive_frontend"
-                    target="_blank"
-                >
-                    <img
-                        id="github_img"
-                        src="./github-logo-white.png"
-                        alt="GitHub"
-                    />
-                </a>
-            </div>
-            <h2 id="user_name"></h2>
-            <br />
-            <h1 id="title" class="rellax" data-rellax-speed="-6">
-                Adventure Archive
-            </h1>
-            <h2 id="summary" class="rellax" data-rellax-speed="-4"></h2>
-            <h3 id="app_purpose" class="rellax" data-rellax-speed="-3">
-                Share your adventures and amazing places.
-            </h3>
-            <h2 id="image_location" class="rellax" data-rellax-speed="-1"></h2>
-        </div>
-        <div id="buttons_div">
-            <button class="button" id="add_site_button">Add Site</button>
-            <button class="button" id="explore_button">Explore</button>
-            <button class="button" id="login_button">Login</button>
-        </div>
-        <div class="rellax" data-rellax-speed="0">
-            <div id="divider_top"></div>
-            <div id="add_site_div">
-                <h2>Add A Site</h2>
-            </div>
-            <div id="divider"></div>
-            <div class="sk-wandering-cubes" id="loading">
-                <div class="sk-cube sk-cube1"></div>
-                <div class="sk-cube sk-cube2"></div>
-            </div>
-            <div id="sites_div"></div>
-        </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="Instagram/Reddit like platform to share interesting archaeological sites and amazing places." />
+    <meta
+      name="keywords"
+      content="sean hetzel, flatiron school, archaeology, maya, reddit, instagram, modern, explore"
+    />
+    <title>Adventure Archive</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <script src="src/index.js" charset="utf-8"></script>
+    <script src="rellax.min.js"></script>
+  </head>
+  <div>
+    <div id="header_div">
+      <div id="contact">
+        <a
+          href="https://github.com/Seanhetzel/adventure_archive_frontend"
+          target="_blank"
+        >
+          <img id="github_img" src="./github-logo-white.png" alt="GitHub" />
+        </a>
+      </div>
+      <h2 id="user_name"></h2>
+      <br />
+      <h1 id="title" class="rellax" data-rellax-speed="-6">
+        Adventure Archive
+      </h1>
+      <h2 id="summary" class="rellax" data-rellax-speed="-4"></h2>
+      <h3 id="app_purpose" class="rellax" data-rellax-speed="-3">
+        Share your adventures and amazing places.
+      </h3>
+      <h2 id="image_location" class="rellax" data-rellax-speed="-1"></h2>
     </div>
+    <div id="buttons_div">
+      <button class="button" id="add_site_button">Add Site</button>
+      <button class="button" id="explore_button">Explore</button>
+      <button class="button" id="login_button">Login</button>
+    </div>
+    <div class="rellax" data-rellax-speed="0">
+      <div id="divider_top"></div>
+      <div id="add_site_div">
+        <h2>Add A Site</h2>
+      </div>
+      <div id="divider"></div>
+      <div class="sk-wandering-cubes" id="loading">
+        <div class="sk-cube sk-cube1"></div>
+        <div class="sk-cube sk-cube2"></div>
+      </div>
+      <div id="sites_div"></div>
+    </div>
+  </div>
 </html>
