@@ -2,7 +2,7 @@
 
 Platform where users can share archaeological sites and amazing places. Its sorta like Reddit because its a discussion platform for sharing/talking about archaeological sites and sorta like Instagram because users scroll can through sites and leave comments much like Instagram.
 
-https://seanhetzel.github.io/adventure_archive_frontend/index.html
+https://sean-hetzel.github.io/adventure_archive_frontend/index.html
 
 ![Adventure Archive](adventure-archive-screenshot-2.PNG)
 
